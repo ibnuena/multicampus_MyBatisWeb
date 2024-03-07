@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user.model.MemberMapper">
+	<select id="userCount" resultType="int">
+		select count(*) from
+		java_member
+	</select>
+
+	<!-- 회원 가입 #{name} -> vo객체의 getName()을 호출 ============ user.model.MemberVO 
+		==> mybatis-config.xml에서 별칭 등록함 -->
+	<insert id="insertMember" parameterType="Member">
+		insert into
+		java_member(name, id, pw, tel, indate)
+		values(#{name}, #{id}, #{pw},
+		#{tel:VARCHAR}, sysdate)
+
+	</insert>
+	<!-- ==================================================== -->
+
+	<!-- 회원 목록. select 결과를 MemberVO에 자동으로 담아준다(setter 메서드 이용) DB 테이블의 컬럼명과 VO객체의 
+		property명이 같아야 자동으로 담아준다 -->
+	<select id="listMember_notpaging" resultType="Member">
+		select * from
+		java_member order by name asc
+	</select>
+
+	<select id="listMember" resultType="Member" parameterType="map">
+		select * from(
+		select row_number() over(order by name asc) rn, java_member.* from 
+		java_member
+		) where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 회원 삭제 ============================================ -->
+	<delete id="deleteMember" parameterType="string">
+		delete from java_member where id = #{id}
+	</delete>
+	<!-- ==================================================== -->
+	
+	
+	
+</mapper>
