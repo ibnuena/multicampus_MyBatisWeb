@@ -14,12 +14,13 @@
 			<th>연락처</th>
 			<th>가입일</th>
 			<th>삭제</th>
+			<th>수정</th>
 		</tr>
 		<!-- ------------------- -->
 		<c:choose> 
 			<c:when test="${memberAll eq null or empty memberAll }">
 				<tr>
-					<td colspan="5">
+					<td colspan="6">
 					<b>데이터가 없습니다</b>
 					</td>
 				</tr>		
@@ -33,6 +34,9 @@
 						<td>${user.indate}</td>
 						<td>
 							<a href="#" onclick="goDel('${user.id}')">삭제</a>
+						</td>
+						<td>
+							<a href="#" onclick="goEdit('${user.id}')">수정</a>						
 						</td>
 					</tr>
 				</c:forEach>
@@ -54,6 +58,10 @@
 	<form name="df" method="post" action="memberDelete.do">
 		<input type="hidden" name="id">
 	</form>
+	<!-- 수정 관련 form -->
+	<form name="uf" method="post" action="memberUpdate.do">
+		<input type="hidden" name="id">
+	</form>
 </div>
 	<script>
 		function goDel(uid){
@@ -64,6 +72,12 @@
 			}
 		}
 	</script>
-
+	<script>
+		function goEdit(uid){
+			uf.id.value=uid;
+			uf.submit();
+			
+		}
+	</script>
 </body>
 </html>

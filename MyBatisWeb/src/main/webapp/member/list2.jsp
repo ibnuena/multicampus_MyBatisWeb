@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*, bbs.model.*" %>
 <jsp:include page="/inc/top.jsp" />
 <jsp:useBean id="dao" class="bbs.model.BbsDAO" scope="session" />
@@ -43,4 +43,4 @@
 			</table>
 		</div>
 <jsp:include page="/inc/foot.jsp" />		
-		    
+		     --%>

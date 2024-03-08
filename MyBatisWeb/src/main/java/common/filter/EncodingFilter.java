@@ -11,24 +11,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpFilter;
 
-// [1] web.xml에 등록하는 방법
-/*
- * <filter>
-  	<filter-name>encodingFilter</filter-name>
-  	<filter-class>common.filter.EncodingFilter</filter-class>
-  	<init-param>
-  		<param-name>encoding</param-name>
-  		<param-value>UTF-8</param-value>
-  	</init-param>
-  </filter>
-  <filter-mapping>
-  	<filter-name>encodingFilter</filter-name>
-  	<url-pattern>/*</url-pattern>
-  </filter-mapping>
- * */
 
-
-// [2]
 
 @WebFilter(
 		urlPatterns = { "/*" }, 

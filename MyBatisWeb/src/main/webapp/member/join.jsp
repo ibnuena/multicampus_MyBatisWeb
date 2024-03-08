@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<script>
+	var win = null;
+	
+	function openWin(){
+		var url = "idCheck.do";
+		win = open(url, "idCheck", "width=500, height=500, left=100, top=100");
+		// get 방식 요청
+	}
+	
+</script>
 <div class="container">
 <form name="mf" method="post" action="<%=request.getContextPath() %>/signup.do">
 		<table border="1" style="width:80%; margin:3em auto">
@@ -20,8 +30,8 @@
 					아이디
 				</th>
 				<td>
-					<input type="text" name="id" required>
-					<button type="button" class="btn">중복 확인</button>
+					<input type="text" name="id" required readonly>
+					<button type="button" class="btn" onclick="openWin()">중복 확인</button>
 				</td>
 			</tr>
 			<tr>

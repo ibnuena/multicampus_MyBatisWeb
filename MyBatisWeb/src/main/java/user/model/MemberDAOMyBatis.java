@@ -1,6 +1,7 @@
 package user.model;
 
 import java.io.IOException;
+
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
@@ -66,10 +67,6 @@ public class MemberDAOMyBatis {
 		}
 	}
 
-	private void close() {
-		if(ses!=null) ses.close();
-	}
-
 	public List<MemberVO> listMember(int start, int end) {
 		try {
 			Map<String, Object> map = new HashMap<>();
@@ -88,15 +85,46 @@ public class MemberDAOMyBatis {
 
 	public int deleteMember(String id) {
 		try {
-//			System.out.println("delete 22");
-
 			ses = this.getSessionFactory().openSession(true);
-//			System.out.println("delete 333");
 			int n = ses.delete(NS + ".deleteMember", id);
-//			System.out.println("delete 33344444444");
 			return n;
 		} finally {
 			close();
 		}
 	}
+
+	public MemberVO getMember(String id) {
+		try {
+			ses = this.getSessionFactory().openSession(true);
+			MemberVO user = ses.selectOne(NS + ".getMember", id);
+			return user;
+		}finally {
+			close();
+		}
+	}
+
+	public int updateMember(MemberVO user) {
+		try {
+			ses = this.getSessionFactory().openSession(true);
+			int n = ses.update(NS + ".updateMember", user);
+			return n;
+		} finally {
+			close();
+		}
+	}
+	
+	public boolean idCheck(String id) {
+		try {
+			ses = this.getSessionFactory().openSession();
+			int cnt = ses.selectOne(NS + ".idCheck", id);
+			return (cnt==1) ? false : true;
+		} finally {
+			close();
+		}
+	}
+	
+	private void close() {
+		if(ses!=null) ses.close();
+	}
+
 }

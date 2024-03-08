@@ -97,6 +97,9 @@ input, select, textarea, iframe, button{
 }
 
 #pageNavi{
+	display: flex;
+	flex-flow: row wrap;
+	justify-content:center;
 	text-align: center;
 	width: 60%;
 	margin:auto;
